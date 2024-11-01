@@ -1,5 +1,6 @@
 package com.example.myapps.API.adapter
 
+import android.media.Image
 import com.example.myapps.R
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.myapps.API.models.Product
 
 class ProductAdapter(private val onClick: (Product) -> Unit) :
@@ -17,7 +19,7 @@ class ProductAdapter(private val onClick: (Product) -> Unit) :
     class ProductViewHolder(itemView: View, val onClick: (Product) -> Unit) :
         RecyclerView.ViewHolder(itemView){
 
-        private val thumbnail: ImageView = itemView.findViewById(R.id.thumbnail)
+        private val thumbnail: ImageView = itemView.findViewById(R.id.thumbnail_img)
         private val title: TextView = itemView.findViewById(R.id.title)
         private val brand: TextView = itemView.findViewById(R.id.brand)
         private val price: TextView = itemView.findViewById(R.id.price)
@@ -38,6 +40,12 @@ class ProductAdapter(private val onClick: (Product) -> Unit) :
             title.text = product.title
             brand.text = product.brand
             price.text = product.price.toString()
+
+            val imgCard = Glide.with(itemView).load(product.thumbnail).centerCrop().into(thumbnail)
+            println("card gambar" + imgCard)
+            println("gambar" + product.thumbnail)
+            Glide.with(itemView).load(product.thumbnail).centerCrop().into(thumbnail)
+
 
         }
     }
