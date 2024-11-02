@@ -39,12 +39,9 @@ object APIClient {
             .client(client) // Set the custom OkHttpClient
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-
     }
 
     val productService: ProductService by lazy {
         retrofit.create(ProductService::class.java)
     }
-
-
 }

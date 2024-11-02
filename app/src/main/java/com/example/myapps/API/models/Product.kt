@@ -6,5 +6,5 @@ data class Product(
     val price:Float,
     val stock:Int,
     val brand:String,
-    val thumbnail:String,
+    val thumbnail:String
 )
