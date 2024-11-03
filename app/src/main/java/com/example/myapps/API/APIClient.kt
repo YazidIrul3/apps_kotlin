@@ -1,6 +1,8 @@
 package com.example.myapps.API
 
+import com.example.myapps.API.models.User
 import com.example.myapps.API.services.ProductService
+import com.example.myapps.API.services.UserService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -44,4 +46,9 @@ object APIClient {
     val productService: ProductService by lazy {
         retrofit.create(ProductService::class.java)
     }
+
+    val userService : UserService by lazy {
+        retrofit.create(UserService::class.java)
+    }
+
 }
