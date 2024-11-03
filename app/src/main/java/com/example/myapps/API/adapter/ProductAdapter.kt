@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.myapps.API.models.Product
 
 class ProductAdapter(private val onClick: (Product) -> Unit) :
@@ -38,6 +39,7 @@ class ProductAdapter(private val onClick: (Product) -> Unit) :
             title.text = product.title
             brand.text = product.brand
             price.text = product.price.toString()
+            Glide.with(itemView).load(product.thumbnail).centerCrop().into(thumbnail)
 
         }
     }
