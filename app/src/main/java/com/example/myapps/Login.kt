@@ -1,6 +1,7 @@
 package com.example.myapps
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -13,13 +14,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.myapps.API.APIClient
+import com.example.myapps.API.models.User
 import com.example.myapps.API.models.UserResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class Login : AppCompatActivity() {
-    private lateinit var sph : SharedPreferences
     private lateinit var txt_username:EditText
     private lateinit var txt_password :EditText
 
@@ -36,6 +37,7 @@ class Login : AppCompatActivity() {
 
         btnLogin.setOnClickListener {
             login()
+
         }
 
         textToRegis.setOnClickListener {
@@ -58,23 +60,29 @@ class Login : AppCompatActivity() {
         }
 
         APIClient.userService.getAuthLogin(username,password)
-            .enqueue(object : Callback<UserResponse> {
+            .enqueue(object : Callback<User> {
+                @SuppressLint("CommitPrefEdits")
                 override fun onResponse(
-                    call: Call<UserResponse>,
-                    response: Response<UserResponse>
+                    call: Call<User>,
+                    response: Response<User>
                 ) {
-                    val response = response.body()
-                    println("login response " + response)
+                    val responseLogin = response.body()
+                    println("login response " + responseLogin)
 
-                    if (response != null) {
+                    if (responseLogin != null) {
                         val intent = Intent(this@Login,MainActivity::class.java)
+                        val sph = applicationContext.getSharedPreferences("login", Context.MODE_PRIVATE)
+                        val edit = sph.edit()
+                        println("username " + responseLogin.username)
+                        edit?.putString("username", responseLogin.username)
+                        edit?.apply()
                         startActivity((intent))
                     } else {
                         Toast.makeText(this@Login,"gagal login",Toast.LENGTH_SHORT).show()
                     }
                 }
 
-                override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                override fun onFailure(call: Call<User>, t: Throwable) {
                     Toast.makeText(this@Login,t.localizedMessage,Toast.LENGTH_SHORT).show()
                 }
 

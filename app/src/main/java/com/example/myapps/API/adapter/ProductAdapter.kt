@@ -39,7 +39,7 @@ class ProductAdapter(private val onClick: (Product) -> Unit) :
             title.text = product.title
             brand.text = product.brand
             price.text = product.price.toString()
-            Glide.with(itemView).load(product.thumbnail).centerCrop().into(thumbnail)
+            Glide.with(itemView).load("https://elevenkomputer.com/3187-large_default/mouse-gaming-hp-m100.jpg").centerCrop().into(thumbnail)
 
         }
     }

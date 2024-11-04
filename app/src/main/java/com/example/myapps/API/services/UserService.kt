@@ -1,5 +1,6 @@
 package com.example.myapps.API.services
 
+import com.example.myapps.API.models.User
 import com.example.myapps.API.models.UserResponse
 import retrofit2.Call
 import retrofit2.http.Field
@@ -12,5 +13,5 @@ interface UserService {
     fun getAuthLogin(
         @Field("username") username: String,
         @Field("password") password: String
-    ) : Call<UserResponse>
+    ) : Call<User>
 }

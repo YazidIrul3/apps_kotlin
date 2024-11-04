@@ -59,13 +59,11 @@ class Product : Fragment() {
 
         searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                searchBar.clearFocus()
                 setSearchProducts(query.toString())
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                searchBar.clearFocus()
                 setSearchProducts(newText.toString())
                 return false
             }
@@ -112,6 +110,8 @@ class Product : Fragment() {
 
     private fun productOnClick(product: Product) {
         val bundle = Bundle()
+        bundle.putInt("id", product.id)
+        println("id product " + product.id)
         bundle.putString("title", product.title)
         bundle.putString("price", product.price.toString())
         val transaction = this.requireActivity().supportFragmentManager.beginTransaction()
