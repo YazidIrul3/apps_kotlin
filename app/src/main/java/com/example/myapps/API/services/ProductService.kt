@@ -1,6 +1,8 @@
 package com.example.myapps.API.services
 
+import com.example.myapps.API.models.Product
 import com.example.myapps.API.models.ProductResponse
+import com.example.myapps.API.models.SingleProduct
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -13,7 +15,7 @@ interface ProductService {
     @GET("products/{id}")
     fun getSingleProduct(
         @Path("id") id : Int
-    ) : Call<ProductResponse>
+    ) : Call<SingleProduct>
 
     @GET("products/search")
     fun getProductSearch(

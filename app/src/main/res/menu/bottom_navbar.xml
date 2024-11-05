@@ -2,9 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 <item
     android:id="@+id/product"
-    android:title="Product" />
+    android:title="Product"
+    android:icon="@drawable/baseline_shopping_bag_24"
+    />
 
     <item
         android:id="@+id/profile"
-        android:title="Profile" />
+        android:title="Profile"
+        android:icon="@drawable/baseline_profile_24"
+        />
 </menu>
