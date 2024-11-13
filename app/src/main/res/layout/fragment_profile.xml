@@ -25,9 +25,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="LOGOUT"
+        android:id="@+id/btn_logout"
         android:textAlignment="center"
         android:layout_marginTop="20dp"
         android:layout_height="70dp" />
 
-
+    <Button
+        android:id="@+id/button_toDashboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/button_addproduct"
+        android:textSize="20dp"
+        android:text="Dashboard"
+        android:textStyle="bold"
+        app:layout_goneMarginTop="40dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

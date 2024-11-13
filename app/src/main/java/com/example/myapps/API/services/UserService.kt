@@ -1,7 +1,6 @@
 package com.example.myapps.API.services
 
 import com.example.myapps.API.models.User
-import com.example.myapps.API.models.UserResponse
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

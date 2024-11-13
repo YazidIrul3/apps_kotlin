@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.widget.SearchView
@@ -36,6 +37,7 @@ class Product : Fragment() {
     private lateinit var searchBar: SearchView
 
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -69,6 +71,8 @@ class Product : Fragment() {
             }
 
         })
+
+
         getData()
 
         return view

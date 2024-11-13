@@ -5,5 +5,7 @@
     <color name="white2">#FFFFFFFF</color>
     <color name="blue">#0B5994</color>
     <color name="grey">#C7BFBF</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="red">#E91E63</color>
 
 </resources>

@@ -3,7 +3,6 @@ package com.example.myapps
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -11,11 +10,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.myapps.API.APIClient
 import com.example.myapps.API.models.User
-import com.example.myapps.API.models.UserResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

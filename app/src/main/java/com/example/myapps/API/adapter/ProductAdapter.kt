@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.example.myapps.API.models.Product
 
 class ProductAdapter(private val onClick: (Product) -> Unit) :
-    ListAdapter<Product, ProductAdapter.ProductViewHolder>(ProductCallBack){
+    ListAdapter<Product, ProductAdapter.ProductViewHolder>(ProductCallback){
 
     class ProductViewHolder(itemView: View, val onClick: (Product) -> Unit) :
         RecyclerView.ViewHolder(itemView){
@@ -57,7 +57,7 @@ class ProductAdapter(private val onClick: (Product) -> Unit) :
 
 }
 
-object ProductCallBack: DiffUtil.ItemCallback<Product>() {
+object ProductCallback: DiffUtil.ItemCallback<Product>() {
     override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
         return  oldItem == newItem
     }

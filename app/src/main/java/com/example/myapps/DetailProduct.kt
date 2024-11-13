@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.myapps.API.APIClient
 import com.example.myapps.API.models.ProductResponse
 import com.example.myapps.API.models.SingleProduct
@@ -20,6 +22,7 @@ class DetailProduct : Fragment() {
     private lateinit var price: String
     private lateinit var titleText: TextView
     private lateinit var priceText: TextView
+    private lateinit var productIMG : ImageView
 
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
@@ -31,11 +34,11 @@ class DetailProduct : Fragment() {
         val idProduct = arguments?.getInt("id")
         var title : String
         var price : String
-        titleText = view.findViewById<TextView>(R.id.title_detail)
-        priceText = view.findViewById<TextView>(R.id.price_detail)
+        titleText = view.findViewById(R.id.title_detail)
+        priceText = view.findViewById(R.id.price_detail)
+        productIMG = view.findViewById(R.id.detail_img)
+        Glide.with(view).load("https://elevenkomputer.com/3187-large_default/mouse-gaming-hp-m100.jpg").centerCrop().into(productIMG)
 
-        title = "Title"
-        price = "1000"
 
         println("id aja" + idProduct)
 
