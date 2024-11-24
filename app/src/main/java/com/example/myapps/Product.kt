@@ -3,6 +3,8 @@ package com.example.myapps
 
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -18,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.myapps.API.APIClient
 import com.example.myapps.API.adapter.ProductAdapter
+import com.example.myapps.API.models.DeleteProduct
 import com.example.myapps.API.models.Product
 import com.example.myapps.API.models.ProductResponse
 import com.google.android.material.search.SearchBar
@@ -51,7 +54,11 @@ class Product : Fragment() {
         searchBar = view.findViewById(R.id.search_bar)
 
         searchBar.clearFocus()
-        productAdapter = ProductAdapter {product -> productOnClick(product)}
+        productAdapter =
+        ProductAdapter{product ->
+            productOnClick(product, "detail")
+        }
+
         recyclerView.adapter = productAdapter
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
 
@@ -111,8 +118,41 @@ class Product : Fragment() {
         })
     }
 
+    private fun editButtonOnclick(product: Product,action: String) {
+        val intent = Intent(context,EditProduct::class.java)
+        val sph = context?.getSharedPreferences("edit product", Context.MODE_PRIVATE)
+        val edit = sph?.edit()
+        println("title " + product.title)
+        edit?.putString("title", product.title)
+        edit?.putString("brand", product.title)
+        edit?.putFloat("price", product.price)
+        edit?.putInt("id", product.id)
+        edit?.apply()
+        startActivity((intent))
+    }
 
-    private fun productOnClick(product: Product) {
+
+    private fun deleteButtonOnclick(product: Product) {
+        APIClient.productService.deleteProduct(product.id)
+            .enqueue(object : Callback<DeleteProduct> {
+                override fun onResponse(
+                    call: Call<DeleteProduct>,
+                    response: Response<DeleteProduct>
+                ) {
+                    println("delete response" + response)
+                    if(response.isSuccessful) {
+                        Toast.makeText(context, "delete success", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<DeleteProduct>, t: Throwable) {
+                    Toast.makeText(context, "delete failed", Toast.LENGTH_SHORT).show()
+                }
+
+            })
+    }
+
+    private fun productOnClick(product: Product,action : String) {
         val bundle = Bundle()
         bundle.putInt("id", product.id)
         println("id product " + product.id)

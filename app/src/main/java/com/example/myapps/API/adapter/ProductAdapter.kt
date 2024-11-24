@@ -1,9 +1,12 @@
 package com.example.myapps.API.adapter
 
+import android.content.Context
+import android.content.Intent
 import com.example.myapps.R
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
@@ -11,8 +14,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapps.API.models.Product
+import com.example.myapps.EditProduct
+import com.example.myapps.MainActivity
 
-class ProductAdapter(private val onClick: (Product) -> Unit) :
+class ProductAdapter( private val onClick: (Product) -> Unit) :
     ListAdapter<Product, ProductAdapter.ProductViewHolder>(ProductCallback){
 
     class ProductViewHolder(itemView: View, val onClick: (Product) -> Unit) :
@@ -22,16 +27,40 @@ class ProductAdapter(private val onClick: (Product) -> Unit) :
         private val title: TextView = itemView.findViewById(R.id.title)
         private val brand: TextView = itemView.findViewById(R.id.brand)
         private val price: TextView = itemView.findViewById(R.id.price)
+        val buttonEdit : ImageButton = itemView.findViewById(R.id.edit_btn_dashboard)
+        val buttonDelete : ImageButton = itemView.findViewById(R.id.delete_btn_dashboard)
 
         private var currentProduct: Product? = null
 
         init {
+
             itemView.setOnClickListener {
+                println("detail")
+
                 currentProduct?.let {
+                    onClick(it)
+                }
+
+            }
+
+            buttonEdit.setOnClickListener {
+                println("edit")
+
+                currentProduct?.let {
+
+                    onClick(it)
+                }
+            }
+
+            buttonDelete.setOnClickListener {
+                currentProduct?.let {
+
                     onClick(it)
                 }
             }
         }
+
+
 
         fun bind(product: Product) {
             currentProduct = product
@@ -44,6 +73,8 @@ class ProductAdapter(private val onClick: (Product) -> Unit) :
         }
     }
 
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.row_product,parent,false)
 
@@ -53,6 +84,8 @@ class ProductAdapter(private val onClick: (Product) -> Unit) :
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = getItem(position)
         holder.bind(product)
+
+
     }
 
 }
@@ -67,3 +100,4 @@ object ProductCallback: DiffUtil.ItemCallback<Product>() {
     }
 
 }
+
